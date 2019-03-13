@@ -102,11 +102,18 @@ public class AlienController {
     
     public boolean isAlpha(String name) {
         char[] chars = name.toCharArray();
+        int istanze = 1;
 
         for (char c : chars) {
-            if(!Character.isLetter(c)) {
+            if(!Character.isLetter(c) && c!='?') {
+            	if (c=='?')
+            		istanze++;
                 return false;
             }
+        }
+        
+        if (istanze>1) {
+        	return false;
         }
 
         return true;

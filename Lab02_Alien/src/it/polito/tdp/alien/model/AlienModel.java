@@ -2,7 +2,6 @@ package it.polito.tdp.alien.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class AlienModel {
@@ -28,6 +27,15 @@ public class AlienModel {
 	 * @return La parola se trovata, null altrimenti
 	 */
 	public String translate(String entry) {
+		if (entry.contains("?"))
+		for (char c='a'; c<='z'; c++) {
+			if (dizionario.containsKey(entry.replace("?", ""+c))) {
+				String elencotraduzioni = new String();
+				for (String s : dizionario.get(entry.replace("?", ""+c)))
+					elencotraduzioni += s+"\n";
+						return elencotraduzioni;
+			}
+		} 
 		if (dizionario.containsKey(entry)) {
 			String elencotraduzioni = new String();
 			for (String s : dizionario.get(entry))
@@ -48,10 +56,12 @@ public class AlienModel {
 			temp.add(traduzione);
 			dizionario.put(parola, temp);
 		}
-		else if (dizionario.containsKey(parola)==true) {
-			ArrayList<String> temp = new ArrayList<String>(dizionario.get(parola));
-			temp.add(traduzione);
-			dizionario.put(parola, temp);
+		else if (dizionario.containsKey(parola)) {
+			if (!dizionario.get(parola).contains(traduzione)) {
+				ArrayList<String> temp = new ArrayList<String>(dizionario.get(parola));
+				temp.add(traduzione);
+				dizionario.put(parola, temp);
+			}
 		}
 	}
 	
