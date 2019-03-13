@@ -15,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public class AlienController {
 	
@@ -46,6 +48,16 @@ public class AlienController {
     
     @FXML
     void doTranslate(ActionEvent event) {
+    	this.function();
+    }
+    	
+    @FXML
+    void doTranslateEnter(KeyEvent event) {
+    	if(event.getCode() == KeyCode.ENTER)
+			this.function();
+    }
+    
+    void function() {
     	
     	if (this.isAlpha(txtWord.getText().replaceAll(" ", ""))==false) {
     		txtResult.appendText("AGGIUNTI CARATTERI NON SUPPORTATI\n");

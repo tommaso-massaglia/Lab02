@@ -35,7 +35,7 @@
                         <Font size="19.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="txtWord" promptText="Inserire Testo" />
+                  <TextField fx:id="txtWord" onKeyPressed="#doTranslateEnter" promptText="Inserire Testo" />
                   <Button fx:id="btnTranslate" mnemonicParsing="false" onAction="#doTranslate" text="Translate" />
                </children>
                <VBox.margin>

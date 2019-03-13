@@ -1,6 +1,8 @@
 package it.polito.tdp.alien.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AlienModel {
@@ -14,10 +16,10 @@ public class AlienModel {
 	// controllo di errore sull'input (ammetto solo lettere)
 	// ricerca case insensitive
 	
-	private Map<String, String> dizionario;
+	private Map<String, ArrayList<String>> dizionario;
 	
 	public AlienModel() {
-		dizionario = new HashMap<String, String>();
+		dizionario = new HashMap<String, ArrayList<String>>();
 	}
 	
 	/**
@@ -26,8 +28,12 @@ public class AlienModel {
 	 * @return La parola se trovata, null altrimenti
 	 */
 	public String translate(String entry) {
-		if (dizionario.containsKey(entry))
-			return dizionario.get(entry);
+		if (dizionario.containsKey(entry)) {
+			String elencotraduzioni = new String();
+			for (String s : dizionario.get(entry))
+				elencotraduzioni += s+"\n";
+					return elencotraduzioni;
+		}
 		return null;
 	}
 	
@@ -37,8 +43,16 @@ public class AlienModel {
 	 * @param traduzione
 	 */
 	public void addParola(String parola, String traduzione) {
-		if (!dizionario.containsKey(parola))
-			dizionario.put(parola, traduzione);
+		if (dizionario.containsKey(parola)!=true) {
+			ArrayList<String> temp = new ArrayList<String>();
+			temp.add(traduzione);
+			dizionario.put(parola, temp);
+		}
+		else if (dizionario.containsKey(parola)==true) {
+			ArrayList<String> temp = new ArrayList<String>(dizionario.get(parola));
+			temp.add(traduzione);
+			dizionario.put(parola, temp);
+		}
 	}
 	
 	public void clearMap() {
